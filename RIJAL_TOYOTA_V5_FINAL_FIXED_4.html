@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>Rijal Toyota - Web Mini Iklan</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--text:#20242a;--muted:#667085;--line:#e5e7eb;--dark:#111827;--green:#168a4a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+header{background:var(--dark);color:#fff;padding:22px 16px;text-align:center}header h1{margin:0 0 7px;font-size:26px}header p{margin:0;color:#d1d5db}
+.wrap{max-width:920px;margin:auto;padding:14px}.card{background:var(--card);border-radius:16px;padding:17px;margin:13px 0;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center;overflow:hidden}.hero img{display:block;width:100%;height:245px;object-fit:cover;border-radius:13px;background:#e9edf1}
+h2{font-size:20px;margin:0 0 11px}h3{margin:10px 0 5px;font-size:18px}.muted{color:var(--muted)}.price{font-size:20px;font-weight:700;margin:8px 0}
+.btn{display:inline-block;border:0;border-radius:10px;padding:11px 14px;background:var(--dark);color:#fff;text-decoration:none;font-weight:700;cursor:pointer;margin:4px 3px 4px 0;font-size:14px}.wa{background:var(--green)}.light{background:#edf0f3;color:#20242a}
+.cars{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.car{border:1px solid var(--line);border-radius:14px;padding:10px;overflow:hidden}.car img{width:100%;height:190px;object-fit:cover;border-radius:10px;background:#edf0f3}
+.profile{display:grid;grid-template-columns:125px 1fr;gap:15px;align-items:center}.profile img{width:125px;height:125px;border-radius:14px;object-fit:cover;background:#edf0f3}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.gallery-item img{width:100%;height:155px;object-fit:cover;border-radius:10px;background:#edf0f3}
+details{border-top:1px solid var(--line);padding:13px 0}details:first-of-type{border-top:0}summary{cursor:pointer;font-weight:700}
+label{display:block;font-size:13px;font-weight:700;margin:9px 0 5px}input,textarea{width:100%;border:1px solid #d6dae1;border-radius:9px;padding:10px;font:inherit;background:#fff}textarea{min-height:78px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.note{font-size:12px;color:var(--muted);line-height:1.5}
+.editorCar{border:1px solid var(--line);border-radius:12px;padding:11px;margin:10px 0}.editorCarHead{display:flex;gap:10px;align-items:center}.editorCarHead img{width:70px;height:55px;object-fit:cover;border-radius:8px;background:#edf0f3}.editorCarHead strong{flex:1}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}footer{text-align:center;padding:20px;color:var(--muted);font-size:12px}
+.empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed #cfd4dc;border-radius:12px}
+@media(max-width:680px){.hero,.profile,.row{grid-template-columns:1fr}.hero img{height:205px;max-height:205px}.cars{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}.profile img{width:110px;height:110px}.profile{grid-template-columns:110px 1fr}}
+
+/* V4 AD / LEAD ENHANCEMENTS */
+.adbar{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:13px 0;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.adbar strong{display:block;font-size:18px;margin-bottom:5px}.adbar p{margin:0 0 10px;color:var(--muted);line-height:1.45}
+.leadgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.leadgrid .full{grid-column:1/-1}
+.stickywa{position:fixed;right:14px;bottom:14px;z-index:20;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:13px 17px;border-radius:999px;box-shadow:0 5px 18px rgba(0,0,0,.2)}
+@media(max-width:680px){.leadgrid{grid-template-columns:1fr}.leadgrid .full{grid-column:auto}.stickywa{left:14px;right:14px;text-align:center}}
+
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Rijal Kalla Toyota</h1>
+  <p id="subtitle">Informasi mobil, promo, dan layanan Toyota</p>
+</header>
+
+<main class="wrap">
+<section class="card hero">
+  <div>
+    <h2 id="heroTitle">Temukan Toyota yang sesuai kebutuhan Anda</h2>
+    <p id="heroText" class="muted">Tanyakan harga, promo, dan simulasi kepada saya. Informasi dapat berubah sesuai program yang berlaku.</p>
+    <a id="heroWa" class="btn wa" href="#" target="_blank" rel="noopener">💬 Tanya via WhatsApp</a>
+  </div>
+  <img id="heroImg" alt="Foto utama">
+</section>
+
+<section class="adbar">
+  <strong>🔥 Cari Toyota yang cocok untuk Anda?</strong>
+  <p>Kirim kebutuhan Anda. Saya bantu cek mobil, promo, DP, dan simulasi sesuai budget.</p>
+  <a id="quickWa" class="btn wa" href="#" target="_blank" rel="noopener">💬 Cek Promo via WhatsApp</a>
+  <a class="btn light" href="#leadForm">📝 Minta Dibantu</a>
+</section>
+
+<section class="card" id="leadForm">
+  <h2>📝 Minta Info & Simulasi</h2>
+  <p class="muted">Isi singkat, lalu kirim ke WhatsApp.</p>
+  <div class="leadgrid">
+    <div><label>Nama</label><input id="leadName" placeholder="Nama Anda"></div>
+    <div><label>No. WhatsApp</label><input id="leadPhone" inputmode="tel" placeholder="08xxxxxxxxxx"></div>
+    <div><label>Mobil yang diminati</label><input id="leadCar" placeholder="Contoh: Avanza"></div>
+    <div><label>Budget / DP</label><input id="leadBudget" placeholder="Contoh: DP 30 juta"></div>
+    <div class="full"><label>Keterangan</label><textarea id="leadNote" placeholder="Tulis kebutuhan atau pertanyaan Anda"></textarea></div>
+  </div>
+  <button class="btn wa" id="leadBtn">📲 Kirim ke WhatsApp</button>
+</section>
+
+<section class="card">
+  <h2>🚗 Pilihan Mobil</h2>
+  <div id="cars" class="cars"></div>
+</section>
+
+<section class="card profile">
+  <img id="profileImg" alt="Foto sales">
+  <div>
+    <h2 id="salesName">Rijal</h2>
+    <p id="salesRole">Sales Consultant Toyota</p>
+    <p id="salesArea" class="muted">Kalla Toyota</p>
+    <a id="profileWa" class="btn wa" href="#" target="_blank" rel="noopener">📱 Hubungi Saya</a>
+  </div>
+</section>
+
+<section class="card">
+  <h2>📸 Penyerahan Unit</h2>
+  <p class="muted">Dokumentasi serah terima unit customer.</p>
+  <div id="gallery" class="gallery"></div>
+</section>
+
+<section class="card">
+<h2>⚙️ Panel Edit</h2>
+
+<details open>
+<summary>Identitas, judul & WhatsApp</summary>
+<label>Judul utama</label><input id="eTitle">
+<label>Subjudul</label><input id="eSubtitle">
+<label>Judul hero</label><input id="eHeroTitle">
+<label>Keterangan hero</label><textarea id="eHeroText"></textarea>
+<label>Nama sales</label><input id="eName">
+<label>Jabatan</label><input id="eRole">
+<label>Dealer</label><input id="eArea">
+<label>Nomor WhatsApp</label><input id="ePhone" inputmode="numeric" placeholder="Contoh: 62812xxxxxxxx">
+</details>
+
+<details>
+<summary>Foto profil & foto utama</summary>
+<label>Foto Bapak / foto profil</label>
+<input type="file" id="profileFile" accept="image/*">
+<label>Foto utama / hero</label>
+<input type="file" id="heroFile" accept="image/*">
+<p class="note">Foto utama adalah gambar besar di bagian paling atas web.</p>
+</details>
+
+<details>
+<summary>✏️ Edit mobil & foto masing-masing mobil</summary>
+<div id="editorCars"></div>
+</details>
+
+<details>
+<summary>➕ Tambah mobil baru</summary>
+<label>Nama mobil / tipe</label><input id="newName">
+<div class="row">
+<div><label>Harga OTR</label><input id="newPrice" placeholder="Rp ..."></div>
+<div><label>DP</label><input id="newDp" placeholder="Mulai Rp ..."></div>
+</div>
+<label>Tenor / keterangan</label><input id="newTenor" placeholder="Contoh: 1-5 tahun">
+<label>Promo</label><input id="newPromo" placeholder="Tanyakan promo terbaru">
+<label>Nama file foto mobil di GitHub</label>
+ <input id="newPhotoPath" placeholder="Contoh: avanza.jpg">
+ <label>Pratinjau lokal dari HP (opsional)</label>
+ <input type="file" id="newPhoto" accept="image/*">
+<button class="btn" id="addCarBtn">➕ Tambah Mobil</button>
+</details>
+
+<details>
+<summary>📸 Galeri penyerahan customer</summary>
+<label>Tambah satu atau beberapa foto</label>
+<input type="file" id="galleryFiles" accept="image/*" multiple>
+<button class="btn" id="addGalleryBtn">➕ Tambah ke Galeri</button>
+</details>
+
+<button class="btn" id="saveBtn">💾 Simpan Perubahan</button>
+<button class="btn light" id="resetBtn">↺ Kembalikan Data Awal</button>
+<p class="note">Pengaturan teks tersimpan di browser perangkat ini. Untuk foto yang harus terlihat oleh semua pengunjung, upload foto ke GitHub lalu masukkan nama file/path-nya pada Panel Edit.</p>
+</section>
+</main>
+
+<a id="stickyWa" class="stickywa" href="#" target="_blank" rel="noopener">💬 Tanya Toyota via WhatsApp</a>
+
+<footer>Informasi harga/promo dapat berubah. Syarat dan ketentuan berlaku. Hubungi sales untuk informasi terbaru.</footer>
+
+<script>
+(function(){
+"use strict";
+
+const INITIAL_CARS = [
+["NEW AGYA","Rp196.300.000"],["NEW CALYA","Rp192.300.000"],["NEW AVANZA","Rp267.000.000"],
+["RAIZE 1.2 G [ONE TONE] [IMP]","Rp277.400.000"],["RUSH [Mi]","Rp317.000.000"],
+["NEW VELOZ 1.5 V HV CVT [NON PREMIUM COLOR]","Rp313.000.000"],["NEW INNOVA","Rp458.400.000"],
+["INNOVA ZENIX 2.0 G CVT [PREMIUM COLOR]","Rp470.500.000"],["YARIS CROSS","Rp381.500.000"],
+["NEW FORTUNER","Rp708.200.000"],["HILUX - RANGGA","Rp214.600.000"],
+["NEW HILUX 2.8 DSL PICK UP 4X4 M/T","Rp436.500.000"],["NEW HILUX 2.8 E DOUBLE CABIN 4X4 M/T","Rp502.200.000"]
+];
+
+const $ = id => document.getElementById(id);
+const els = {
+ title:$("title"),subtitle:$("subtitle"),heroTitle:$("heroTitle"),heroText:$("heroText"),heroWa:$("heroWa"),
+ heroImg:$("heroImg"),profileImg:$("profileImg"),salesName:$("salesName"),salesRole:$("salesRole"),salesArea:$("salesArea"),
+ profileWa:$("profileWa"),quickWa:$("quickWa"),cars:$("cars"),gallery:$("gallery"),editorCars:$("editorCars"),
+ eTitle:$("eTitle"),eSubtitle:$("eSubtitle"),eHeroTitle:$("eHeroTitle"),eHeroText:$("eHeroText"),
+ eName:$("eName"),eRole:$("eRole"),eArea:$("eArea"),ePhone:$("ePhone"),profileFile:$("profileFile"),heroFile:$("heroFile"),eProfilePath:$("eProfilePath"),eHeroPath:$("eHeroPath"),
+ newName:$("newName"),newPrice:$("newPrice"),newDp:$("newDp"),newTenor:$("newTenor"),newPromo:$("newPromo"),
+ newPhoto:$("newPhoto"),newPhotoPath:$("newPhotoPath"),galleryFiles:$("galleryFiles"),galleryPaths:$("galleryPaths")
+};
+
+function placeholder(text){
+ return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(
+ '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560"><rect width="100%" height="100%" fill="#e9edf1"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="30" fill="#667085">'+text+'</text></svg>'
+ );
+}
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+function readImage(file){
+ return new Promise(resolve=>{
+   if(!file){resolve("");return;}
+   const r=new FileReader();
+   r.onload=()=>resolve(r.result);
+   r.onerror=()=>resolve("");
+   r.readAsDataURL(file);
+ });
+}
+function defaultData(){
+ return {
+  title:"Rijal Kalla Toyota",subtitle:"Informasi mobil, promo, dan layanan Toyota",
+  heroTitle:"Temukan Toyota yang sesuai kebutuhan Anda",
+  heroText:"Tanyakan harga, promo, dan simulasi kepada saya. Informasi dapat berubah sesuai program yang berlaku.",
+  name:"Rijal",role:"Sales Consultant Toyota",area:"Kalla Toyota",phone:"",
+  profile:"",hero:"",profilePath:"",heroPath:"",gallery:[],
+  cars:INITIAL_CARS.map(x=>({name:x[0],price:x[1],dp:"",tenor:"",promo:"Tanyakan promo terbaru",img:"",imgPath:""}))
+ };
+}
+
+/* IndexedDB keeps larger photo collections more reliable than localStorage. */
+const DB="RijalToyotaMiniDB", STORE="data", KEY="main";
+
+/* Foto permanen website: upload foto ke folder images di GitHub,
+   lalu isi nama file/path pada Panel Edit. */
+const SITE_IMAGE_BASE="./images/";
+function siteImg(path){
+  if(!path) return "";
+  if(/^https?:\/\//i.test(path) || /^data:/i.test(path)) return path;
+  return SITE_IMAGE_BASE + path.replace(/^\/+/, "");
+}
+function openDB(){
+ return new Promise((resolve,reject)=>{
+  if(!window.indexedDB){resolve(null);return;}
+  const req=indexedDB.open(DB,1);
+  req.onupgradeneeded=()=>req.result.createObjectStore(STORE);
+  req.onsuccess=()=>resolve(req.result);
+  req.onerror=()=>reject(req.error);
+ });
+}
+async function dbGet(){
+ try{const db=await openDB(); if(!db)return null;
+  return await new Promise((res,rej)=>{const r=db.transaction(STORE,"readonly").objectStore(STORE).get(KEY);r.onsuccess=()=>res(r.result||null);r.onerror=()=>rej(r.error);});
+ }catch(e){return null}
+}
+async function dbSet(data){
+ const db=await openDB();
+ if(!db){localStorage.setItem("rijalToyotaMiniFallback",JSON.stringify(data));return;}
+ await new Promise((res,rej)=>{const r=db.transaction(STORE,"readwrite").objectStore(STORE).put(data,KEY);r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});
+}
+async function load(){
+ let d=await dbGet();
+ if(!d){try{d=JSON.parse(localStorage.getItem("rijalToyotaMiniFallback")||"null")}catch(e){}}
+ return d||defaultData();
+}
+let data;
+
+function waUrl(){
+ const n=(data.phone||"").replace(/\D/g,"");
+ return n ? "https://wa.me/"+n+"?text="+encodeURIComponent("Halo Pak Rijal, saya ingin informasi mobil Toyota dan promo yang tersedia.") : "#";
+}
+
+async function cleanHeroImage(){
+ const src=data && data.hero;
+ if(!src || !/^data:image\//i.test(src)) return;
+ try{
+  const im=new Image();
+  await new Promise((resolve,reject)=>{
+   im.onload=resolve; im.onerror=reject; im.src=src;
+  });
+  const ratio=im.naturalWidth/(im.naturalHeight||1);
+  if(ratio<0.70 || ratio>2.20){
+   data.hero="";
+   await dbSet(data);
+  }
+ }catch(e){}
+}
+
+function render(){
+ els.title.textContent=data.title;els.subtitle.textContent=data.subtitle;els.heroTitle.textContent=data.heroTitle;els.heroText.textContent=data.heroText;
+ els.salesName.textContent=data.name;els.salesRole.textContent=data.role;els.salesArea.textContent=data.area;
+ els.heroWa.href=waUrl();els.profileWa.href=waUrl();els.quickWa.href=waUrl();$("stickyWa").href=waUrl();
+ els.heroImg.src=data.hero||siteImg(data.heroPath)||placeholder("Foto Utama");els.profileImg.src=data.profile||siteImg(data.profilePath)||placeholder("Foto Profil");
+
+ els.eTitle.value=data.title;els.eSubtitle.value=data.subtitle;els.eHeroTitle.value=data.heroTitle;els.eHeroText.value=data.heroText;
+ els.eName.value=data.name;els.eRole.value=data.role;els.eArea.value=data.area;els.ePhone.value=data.phone;if(els.eProfilePath) els.eProfilePath.value=data.profilePath||""; if(els.eHeroPath) els.eHeroPath.value=data.heroPath||"";
+
+ els.cars.innerHTML=data.cars.length?data.cars.map((c,i)=>`
+ <article class="car">
+   <img src="${c.img||siteImg(c.imgPath)||placeholder(c.name)}" alt="${esc(c.name)}">
+   <h3>${esc(c.name)}</h3>
+   <div class="price">${esc(c.price)}</div>
+   ${c.dp?`<p>DP: ${esc(c.dp)}</p>`:""}
+   ${c.tenor?`<p class="muted">${esc(c.tenor)}</p>`:""}
+   <p><b>${esc(c.promo||"Tanyakan promo terbaru")}</b></p>
+   <a class="btn wa" href="${waUrl()}" target="_blank" rel="noopener">Tanya Promo</a>
+ </article>`).join("") : '<div class="empty">Belum ada mobil.</div>';
+
+ els.editorCars.innerHTML=data.cars.map((c,i)=>`
+ <div class="editorCar">
+  <div class="editorCarHead"><img src="${c.img||siteImg(c.imgPath)||placeholder("Mobil")}"><strong>${esc(c.name)}</strong></div>
+  <label>Nama mobil / tipe</label><input data-i="${i}" data-k="name" value="${esc(c.name)}">
+  <div class="row"><div><label>Harga OTR</label><input data-i="${i}" data-k="price" value="${esc(c.price)}"></div>
+  <div><label>DP</label><input data-i="${i}" data-k="dp" value="${esc(c.dp)}"></div></div>
+  <label>Tenor / keterangan</label><input data-i="${i}" data-k="tenor" value="${esc(c.tenor)}">
+  <label>Promo</label><input data-i="${i}" data-k="promo" value="${esc(c.promo)}">
+  <label>Nama file foto mobil di GitHub</label>
+   <input data-i="${i}" data-k="imgPath" value="${esc(c.imgPath||"")}" placeholder="Contoh: avanza.jpg">
+   <label>Pratinjau lokal dari HP (opsional)</label>
+   <input type="file" accept="image/*" data-photo="${i}">
+  <button class="btn light" data-delete="${i}">🗑️ Hapus Mobil</button>
+ </div>`).join("");
+
+ els.gallery.innerHTML=data.gallery.length?data.gallery.map((g,i)=>`
+ <div class="gallery-item"><img src="${g.startsWith("data:")||g.startsWith("http")?g:siteImg(g)}" alt="Penyerahan unit"><button class="btn light" data-delgallery="${i}">Hapus</button></div>`).join("")
+ : '<div class="empty">Belum ada foto penyerahan unit.</div>';
+}
+
+async function saveGeneral(){
+ data.title=els.eTitle.value.trim()||"Rijal Kalla Toyota";data.subtitle=els.eSubtitle.value.trim();
+ data.heroTitle=els.eHeroTitle.value.trim();data.heroText=els.eHeroText.value.trim();
+ data.name=els.eName.value.trim();data.role=els.eRole.value.trim();data.area=els.eArea.value.trim();data.phone=els.ePhone.value.trim();data.profilePath=(els.eProfilePath ? els.eProfilePath.value : "").trim();data.heroPath=(els.eHeroPath ? els.eHeroPath.value : "").trim();
+ const p=await readImage(els.profileFile.files[0]);if(p)data.profile=p;
+ const h=await readImage(els.heroFile.files[0]);if(h)data.hero=h;
+ await dbSet(data);els.profileFile.value="";els.heroFile.value="";render();alert("Perubahan berhasil disimpan.");
+}
+
+async function addCar(){
+    const imgPath=els.newPhotoPath ? els.newPhotoPath.value.trim() : "";
+ const name=els.newName.value.trim();
+ if(!name){alert("Isi nama mobil terlebih dahulu.");els.newName.focus();return;}
+ const img=await readImage(els.newPhoto.files[0]);
+ data.cars.push({name,price:els.newPrice.value.trim()||"Hubungi untuk harga",dp:els.newDp.value.trim(),tenor:els.newTenor.value.trim(),promo:els.newPromo.value.trim()||"Tanyakan promo terbaru",img,imgPath});
+ await dbSet(data);
+ [els.newName,els.newPrice,els.newDp,els.newTenor,els.newPromo,els.newPhotoPath].forEach(x=>x.value="");els.newPhoto.value="";
+ render();alert("Mobil berhasil ditambahkan.");
+}
+
+async function addGallery(){
+ const files=Array.from(els.galleryFiles.files||[]);
+ if(!files.length){alert("Pilih foto terlebih dahulu.");return;}
+ for(const f of files){const img=await readImage(f);if(img)data.gallery.push(img);}
+ await dbSet(data);els.galleryFiles.value="";render();alert("Foto berhasil ditambahkan ke galeri.");
+}
+
+els.editorCars.addEventListener("input",e=>{
+ const i=e.target.dataset.i,k=e.target.dataset.k;
+ if(i!==undefined&&k){data.cars[Number(i)][k]=e.target.value;}
+});
+els.editorCars.addEventListener("change",async e=>{
+ const i=e.target.dataset.photo;
+ if(i!==undefined){
+  const img=await readImage(e.target.files[0]);
+  if(img){data.cars[Number(i)].img=img;await dbSet(data);render();alert("Foto mobil berhasil diperbarui.");}
+ }
+});
+els.editorCars.addEventListener("click",async e=>{
+ const b=e.target.closest("[data-delete]");if(b){const i=Number(b.dataset.delete);if(confirm("Hapus mobil ini?")){data.cars.splice(i,1);await dbSet(data);render();}}
+});
+els.gallery.addEventListener("click",async e=>{
+ const b=e.target.closest("[data-delgallery]");if(b){const i=Number(b.dataset.delgallery);if(confirm("Hapus foto ini?")){data.gallery.splice(i,1);await dbSet(data);render();}}
+});
+
+$("saveBtn").addEventListener("click",saveGeneral);
+$("addCarBtn").addEventListener("click",addCar);
+$("addGalleryBtn").addEventListener("click",addGallery);
+
+
+$("leadBtn").addEventListener("click",()=>{
+  const name=$("leadName").value.trim();
+  const phone=$("leadPhone").value.trim();
+  const car=$("leadCar").value.trim();
+  const budget=$("leadBudget").value.trim();
+  const note=$("leadNote").value.trim();
+  const n=(data.phone||"").replace(/\D/g,"");
+  if(!n){alert("Nomor WhatsApp sales belum diisi di Panel Edit.");return;}
+  const msg=`Halo Pak Rijal, saya ingin informasi Toyota.%0A%0ANama: ${encodeURIComponent(name||"-")}%0ANo. WA: ${encodeURIComponent(phone||"-")}%0AMobil: ${encodeURIComponent(car||"-")}%0ABudget/DP: ${encodeURIComponent(budget||"-")}%0AKeterangan: ${encodeURIComponent(note||"-")}`;
+  window.open("https://wa.me/"+n+"?text="+msg,"_blank");
+});
+
+$("resetBtn").addEventListener("click",async()=>{
+ if(confirm("Kembalikan 13 mobil dan data awal? Foto/ubahsuaian saat ini akan dihapus.")){
+  data=defaultData();await dbSet(data);render();alert("Data awal dikembalikan.");
+ }
+});
+
+(async()=>{data=await load();await cleanHeroImage();render();})();
+})();
+</script>
+</body>
+</html>
