@@ -113,6 +113,20 @@ header p{font-size:14px;opacity:.92}
 }
 </style>
 
+
+<style id="rijal-v8-fix">
+/* V8: prevent the fixed WhatsApp bar from covering gallery controls */
+body{padding-bottom:96px}
+.gallery{padding-bottom:92px}
+.gallery-item{position:relative}
+.stickywa{z-index:9999}
+@media(max-width:680px){
+  body{padding-bottom:92px}
+  .gallery{padding-bottom:96px}
+  .stickywa{left:12px;right:12px;bottom:10px;font-size:17px}
+}
+</style>
+
 </head>
 <body>
 <header>
