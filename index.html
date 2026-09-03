@@ -402,7 +402,7 @@ async function load(){
 let data;
 
 function waUrl(){
- const n=(data.phone||"").replace(/\D/g,"");
+ let n=(data.phone||"").replace(/\D/g,""); if(n.startsWith("0")) n="62"+n.slice(1); else if(n.startsWith("8")) n="62"+n;
  return n ? "https://wa.me/"+n+"?text="+encodeURIComponent("Halo Pak Rijal, saya ingin informasi mobil Toyota dan promo yang tersedia.") : "#";
 }
 
@@ -544,7 +544,7 @@ $("leadBtn").addEventListener("click",()=>{
   const car=$("leadCar").value.trim();
   const budget=$("leadBudget").value.trim();
   const note=$("leadNote").value.trim();
-  const n=(data.phone||"").replace(/\D/g,"");
+  let n=(data.phone||"").replace(/\D/g,""); if(n.startsWith("0")) n="62"+n.slice(1); else if(n.startsWith("8")) n="62"+n;
   if(!n){alert("Nomor WhatsApp sales belum diisi di Panel Edit.");return;}
   const msg=`Halo Pak Rijal, saya ingin informasi Toyota.%0A%0ANama: ${encodeURIComponent(name||"-")}%0ANo. WA: ${encodeURIComponent(phone||"-")}%0AMobil: ${encodeURIComponent(car||"-")}%0ABudget/DP: ${encodeURIComponent(budget||"-")}%0AKeterangan: ${encodeURIComponent(note||"-")}`;
   window.open("https://wa.me/"+n+"?text="+msg,"_blank");
