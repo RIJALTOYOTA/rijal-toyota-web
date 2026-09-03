@@ -31,6 +31,9 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}footer{text-align:cen
 .stickywa{position:fixed;right:14px;bottom:14px;z-index:20;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:13px 17px;border-radius:999px;box-shadow:0 5px 18px rgba(0,0,0,.2)}
 @media(max-width:680px){.leadgrid{grid-template-columns:1fr}.leadgrid .full{grid-column:auto}.stickywa{left:14px;right:14px;text-align:center}}
 
+
+/* PUBLIC VERSION: customer view only */
+#adminPanel{display:none !important;}
 </style>
 
 <style id="rijal-v7-enhancement">
@@ -185,7 +188,7 @@ body{padding-bottom:96px}
   <div id="gallery" class="gallery"></div>
 </section>
 
-<section class="card">
+<section class="card" id="adminPanel">
 <h2>⚙️ Panel Edit</h2>
 
 <details open>
@@ -447,11 +450,11 @@ function render(){
    <input data-i="${i}" data-k="imgPath" value="${esc(c.imgPath||"")}" placeholder="Contoh: avanza.jpg">
    <label>Pratinjau lokal dari HP (opsional)</label>
    <input type="file" accept="image/*" data-photo="${i}">
-  
+  <button class="btn light" data-delete="${i}">🗑️ Hapus Mobil</button>
  </div>`).join("");
 
  els.gallery.innerHTML=data.gallery.length?data.gallery.map((g,i)=>`
- <div class="gallery-item"><img src="${g.startsWith("data:")||g.startsWith("http")?g:siteImg(g)}" alt="Penyerahan unit"></div>`).join("")
+ <div class="gallery-item"><img src="${g.startsWith("data:")||g.startsWith("http")?g:siteImg(g)}" alt="Penyerahan unit"><button class="btn light" data-delgallery="${i}">Hapus</button></div>`).join("")
  : '<div class="empty">Belum ada foto penyerahan unit.</div>';
 }
 
@@ -493,7 +496,16 @@ els.editorCars.addEventListener("change",async e=>{
   if(img){data.cars[Number(i)].img=img;await dbSet(data);render();alert("Foto mobil berhasil diperbarui.");}
  }
 });
+els.editorCars.addEventListener("click",async e=>{
+ const b=e.target.closest("[data-delete]");if(b){const i=Number(b.dataset.delete);if(confirm("Hapus mobil ini?")){data.cars.splice(i,1);await dbSet(data);render();}}
+});
+els.gallery.addEventListener("click",async e=>{
+ const b=e.target.closest("[data-delgallery]");if(b){const i=Number(b.dataset.delgallery);if(confirm("Hapus foto ini?")){data.gallery.splice(i,1);await dbSet(data);render();}}
+});
 
+$("saveBtn").addEventListener("click",saveGeneral);
+$("addCarBtn").addEventListener("click",addCar);
+$("addGalleryBtn").addEventListener("click",addGallery);
 
 $("exportBtn").addEventListener("click",async()=>{
   try{
@@ -534,6 +546,11 @@ $("leadBtn").addEventListener("click",()=>{
   window.open("https://wa.me/"+n+"?text="+msg,"_blank");
 });
 
+$("resetBtn").addEventListener("click",async()=>{
+ if(confirm("Kembalikan 13 mobil dan data awal? Foto/ubahsuaian saat ini akan dihapus.")){
+  data=defaultData();await dbSet(data);render();alert("Data awal dikembalikan.");
+ }
+});
 
 (async()=>{data=await load();if(!data.hero){data.hero=DEFAULT_HERO_IMAGE;await dbSet(data);}await cleanHeroImage();render();})();
 })();
