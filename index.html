@@ -127,12 +127,6 @@ body{padding-bottom:96px}
 }
 </style>
 
-
-<style id="rijal-public-admin-lock">
-/* Public mode: hide the editor from normal visitors. */
-#adminPanel{display:none !important}
-body.admin-mode #adminPanel{display:block !important}
-</style>
 </head>
 <body>
 <header>
@@ -191,7 +185,7 @@ body.admin-mode #adminPanel{display:block !important}
   <div id="gallery" class="gallery"></div>
 </section>
 
-<section class="card" id="adminPanel">
+<section class="card">
 <h2>⚙️ Panel Edit</h2>
 
 <details open>
@@ -453,11 +447,11 @@ function render(){
    <input data-i="${i}" data-k="imgPath" value="${esc(c.imgPath||"")}" placeholder="Contoh: avanza.jpg">
    <label>Pratinjau lokal dari HP (opsional)</label>
    <input type="file" accept="image/*" data-photo="${i}">
-  <button class="btn light" data-delete="${i}">🗑️ Hapus Mobil</button>
+  
  </div>`).join("");
 
  els.gallery.innerHTML=data.gallery.length?data.gallery.map((g,i)=>`
- <div class="gallery-item"><img src="${g.startsWith("data:")||g.startsWith("http")?g:siteImg(g)}" alt="Penyerahan unit"><button class="btn light" data-delgallery="${i}">Hapus</button></div>`).join("")
+ <div class="gallery-item"><img src="${g.startsWith("data:")||g.startsWith("http")?g:siteImg(g)}" alt="Penyerahan unit"></div>`).join("")
  : '<div class="empty">Belum ada foto penyerahan unit.</div>';
 }
 
@@ -499,16 +493,7 @@ els.editorCars.addEventListener("change",async e=>{
   if(img){data.cars[Number(i)].img=img;await dbSet(data);render();alert("Foto mobil berhasil diperbarui.");}
  }
 });
-els.editorCars.addEventListener("click",async e=>{
- const b=e.target.closest("[data-delete]");if(b){const i=Number(b.dataset.delete);if(confirm("Hapus mobil ini?")){data.cars.splice(i,1);await dbSet(data);render();}}
-});
-els.gallery.addEventListener("click",async e=>{
- const b=e.target.closest("[data-delgallery]");if(b){const i=Number(b.dataset.delgallery);if(confirm("Hapus foto ini?")){data.gallery.splice(i,1);await dbSet(data);render();}}
-});
 
-$("saveBtn").addEventListener("click",saveGeneral);
-$("addCarBtn").addEventListener("click",addCar);
-$("addGalleryBtn").addEventListener("click",addGallery);
 
 $("exportBtn").addEventListener("click",async()=>{
   try{
@@ -549,29 +534,8 @@ $("leadBtn").addEventListener("click",()=>{
   window.open("https://wa.me/"+n+"?text="+msg,"_blank");
 });
 
-$("resetBtn").addEventListener("click",async()=>{
- if(confirm("Kembalikan 13 mobil dan data awal? Foto/ubahsuaian saat ini akan dihapus.")){
-  data=defaultData();await dbSet(data);render();alert("Data awal dikembalikan.");
- }
-});
 
 (async()=>{data=await load();if(!data.hero){data.hero=DEFAULT_HERO_IMAGE;await dbSet(data);}await cleanHeroImage();render();})();
-})();
-</script>
-
-<script id="rijal-admin-access">
-(function(){
-  const ADMIN_PIN = "RijalAdmin2026";
-  function unlock(){
-    const pin = prompt("Masukkan PIN Admin Rijal Toyota:");
-    if(pin === ADMIN_PIN){
-      document.body.classList.add("admin-mode");
-      alert("Mode Admin aktif. Panel Edit sekarang terlihat di HP ini.");
-    }else if(pin !== null){
-      alert("PIN salah. Website tetap dalam mode pelanggan.");
-    }
-  }
-  if(location.hash.toLowerCase() === "#admin") unlock();
 })();
 </script>
 </body>
