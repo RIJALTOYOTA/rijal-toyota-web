@@ -28,8 +28,35 @@ hr{border:0;border-top:1px solid var(--line);margin:14px 0}footer{text-align:cen
 .adbar{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:13px 0;box-shadow:0 2px 12px rgba(0,0,0,.05)}
 .adbar strong{display:block;font-size:18px;margin-bottom:5px}.adbar p{margin:0 0 10px;color:var(--muted);line-height:1.45}
 .leadgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.leadgrid .full{grid-column:1/-1}
-.stickywa{position:fixed;right:14px;bottom:14px;z-index:20;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:13px 17px;border-radius:999px;box-shadow:0 5px 18px rgba(0,0,0,.2)}
-@media(max-width:680px){.leadgrid{grid-template-columns:1fr}.leadgrid .full{grid-column:auto}.stickywa{left:14px;right:14px;text-align:center}}
+.stickywa{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:20;
+  background:var(--green);
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  font-size:15px;
+  padding:11px 15px;
+  border-radius:999px;
+  box-shadow:0 5px 18px rgba(0,0,0,.22);
+  max-width:calc(100vw - 32px);
+  white-space:nowrap;
+}
+@media(max-width:680px){
+  .leadgrid{grid-template-columns:1fr}
+  .leadgrid .full{grid-column:auto}
+  .stickywa{
+    left:auto;
+    right:14px;
+    bottom:14px;
+    width:auto;
+    max-width:calc(100vw - 28px);
+    padding:10px 13px;
+    font-size:14px;
+  }
+}
 
 </style>
 
@@ -394,8 +421,14 @@ async function load(){
 }
 let data;
 
+function waNumber(){
+ let n=(data.phone||"").replace(/\D/g,"");
+ if(n.startsWith("0")) n="62"+n.slice(1);
+ else if(n.startsWith("8")) n="62"+n;
+ return n;
+}
 function waUrl(){
- const n=(data.phone||"").replace(/\D/g,"");
+ const n=waNumber();
  return n ? "https://wa.me/"+n+"?text="+encodeURIComponent("Halo Pak Rijal, saya ingin informasi mobil Toyota dan promo yang tersedia.") : "#";
 }
 
@@ -537,7 +570,7 @@ $("leadBtn").addEventListener("click",()=>{
   const car=$("leadCar").value.trim();
   const budget=$("leadBudget").value.trim();
   const note=$("leadNote").value.trim();
-  const n=(data.phone||"").replace(/\D/g,"");
+  const n=waNumber();
   if(!n){alert("Nomor WhatsApp sales belum diisi di Panel Edit.");return;}
   const msg=`Halo Pak Rijal, saya ingin informasi Toyota.%0A%0ANama: ${encodeURIComponent(name||"-")}%0ANo. WA: ${encodeURIComponent(phone||"-")}%0AMobil: ${encodeURIComponent(car||"-")}%0ABudget/DP: ${encodeURIComponent(budget||"-")}%0AKeterangan: ${encodeURIComponent(note||"-")}`;
   window.open("https://wa.me/"+n+"?text="+msg,"_blank");
