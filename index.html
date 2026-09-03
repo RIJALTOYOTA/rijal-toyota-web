@@ -212,7 +212,7 @@ body{padding-bottom:96px}
   <div id="gallery" class="gallery"></div>
 </section>
 
-<section class="card">
+<section class="card" id="adminPanel" style="display:none">
 <h2>⚙️ Panel Edit</h2>
 
 <details open>
@@ -581,6 +581,19 @@ $("resetBtn").addEventListener("click",async()=>{
   data=defaultData();await dbSet(data);render();alert("Data awal dikembalikan.");
  }
 });
+
+// Panel Edit hanya tampil di perangkat yang diaktifkan sebagai admin.
+(function(){
+  const params=new URLSearchParams(location.search);
+  const panel=document.getElementById("adminPanel");
+  if(!panel) return;
+  if(params.get("admin")==="rijal"){
+    localStorage.setItem("rijal_admin","1");
+  }
+  if(localStorage.getItem("rijal_admin")==="1"){
+    panel.style.display="";
+  }
+})();
 
 (async()=>{
   try{
