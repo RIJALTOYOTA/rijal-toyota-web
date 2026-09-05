@@ -318,6 +318,7 @@ function defaultData(){
 
 /* IndexedDB keeps larger photo collections more reliable than localStorage. */
 const DB="RijalToyotaMiniDB", STORE="data", KEY="main";
+const HERO_IMAGE_VERSION="2026-09-05-rijal-hero-v1";
 
 /* Foto permanen website: upload foto ke folder images di GitHub,
    lalu isi nama file/path pada Panel Edit. */
@@ -382,6 +383,11 @@ async function load(){
 
  // AMAN: pertahankan seluruh data yang sudah tersimpan.
  // Hanya lengkapi field yang memang kosong; tidak mengganti foto/data lama.
+ if(exported && typeof exported === "object" && exported.hero && d.heroVersion !== HERO_IMAGE_VERSION){
+  d.hero=exported.hero;
+  d.heroVersion=HERO_IMAGE_VERSION;
+  await dbSet(d);
+ }
  if(!Array.isArray(d.cars)) d.cars=[];
  const existingByName=new Map(d.cars.map(c=>[(c&&c.name||"").trim().toUpperCase(),c]));
  for(const [name,price] of INITIAL_CARS){
@@ -556,7 +562,14 @@ $("resetBtn").addEventListener("click",async()=>{
  }
 });
 
-(async()=>{data=await load();if(!data.hero){data.hero=DEFAULT_HERO_IMAGE;await dbSet(data);}await cleanHeroImage();render();})();
+(async()=>{data=await load();
+ if(EXPORTED_SITE_DATA && EXPORTED_SITE_DATA.hero && data.heroVersion !== HERO_IMAGE_VERSION){
+  data.hero=EXPORTED_SITE_DATA.hero;
+  data.heroVersion=HERO_IMAGE_VERSION;
+  await dbSet(data);
+ }
+ if(!data.hero){data.hero=DEFAULT_HERO_IMAGE;await dbSet(data);}
+ await cleanHeroImage();render();})();
 })();
 </script>
 </body>
