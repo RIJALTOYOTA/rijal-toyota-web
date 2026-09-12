@@ -822,7 +822,7 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;}
 /* PANEL EDIT PRIVAT — hanya muncul setelah PIN benar */
 #adminPanel { display:none !important; }
 #adminGate{
-  display:block;
+  display:none;
   position:fixed;
   inset:0;
   z-index:100000;
@@ -975,6 +975,10 @@ body.admin-unlocked #privateAdminBanner{display:block}
 </style>
 
 
+
+<style id="rijal-hide-car-large-photos-final">
+#cars .car img{display:none !important;}
+</style>
 </head>
 <body id="top">
 <div id="adminGate" aria-hidden="true">
@@ -1774,9 +1778,10 @@ document.addEventListener("DOMContentLoaded", function(){
     window.scrollTo({top:0,behavior:"smooth"});
   }
 
-  // Public view starts locked.
+  // Public view starts with the private gate hidden.
+  // The owner can open it from the secret admin button.
   document.body.classList.remove("admin-unlocked");
-  gate.style.display="block";
+  gate.style.display="none";
 
   if(login) login.addEventListener("click",unlock);
   if(close) close.addEventListener("click",()=>{gate.style.display="none";gate.setAttribute("aria-hidden","true");});
