@@ -1,0 +1,81 @@
+[
+  {
+    "nama": "AGYA",
+    "foto": "agya.jpg",
+    "tipe": [
+      {"tipe": "NEW AGYA", "harga": "Rp196.300.000"}
+    ]
+  },
+  {
+    "nama": "CALYA",
+    "foto": "calya.jpg",
+    "tipe": [
+      {"tipe": "NEW CALYA", "harga": "Rp192.300.000"}
+    ]
+  },
+  {
+    "nama": "AVANZA",
+    "foto": "avanza.jpg",
+    "tipe": [
+      {"tipe": "NEW AVANZA", "harga": "Rp267.000.000"}
+    ]
+  },
+  {
+    "nama": "RAIZE",
+    "foto": "raize.jpg",
+    "tipe": [
+      {"tipe": "RAIZE 1.2 G [ONE TONE] [IMP]", "harga": "Rp277.400.000"}
+    ]
+  },
+  {
+    "nama": "RUSH",
+    "foto": "rush.jpg",
+    "tipe": [
+      {"tipe": "RUSH [Mi]", "harga": "Rp317.000.000"}
+    ]
+  },
+  {
+    "nama": "VELOZ",
+    "foto": "veloz.jpg",
+    "tipe": [
+      {"tipe": "NEW VELOZ 1.5 V HV CVT [NON PREMIUM COLOR]", "harga": "Rp313.000.000"}
+    ]
+  },
+  {
+    "nama": "INNOVA",
+    "foto": "innova.jpg",
+    "tipe": [
+      {"tipe": "NEW INNOVA", "harga": "Rp458.400.000"},
+      {"tipe": "INNOVA ZENIX 2.0 G CVT [PREMIUM COLOR]", "harga": "Rp470.500.000"}
+    ]
+  },
+  {
+    "nama": "YARIS CROSS",
+    "foto": "yaris-cross.jpg",
+    "tipe": [
+      {"tipe": "YARIS CROSS", "harga": "Rp381.500.000"}
+    ]
+  },
+  {
+    "nama": "FORTUNER",
+    "foto": "fortuner.jpg",
+    "tipe": [
+      {"tipe": "NEW FORTUNER", "harga": "Rp708.200.000"}
+    ]
+  },
+  {
+    "nama": "HILUX RANGGA",
+    "foto": "hilux-rangga.jpg",
+    "tipe": [
+      {"tipe": "HILUX - RANGGA", "harga": "Rp214.600.000"}
+    ]
+  },
+  {
+    "nama": "HILUX",
+    "foto": "hilux.jpg",
+    "tipe": [
+      {"tipe": "NEW HILUX 2.8 DSL PICK UP 4X4 M/T", "harga": "Rp436.500.000"},
+      {"tipe": "NEW HILUX 2.8 E DOUBLE CABIN 4X4 M/T", "harga": "Rp502.200.000"}
+    ]
+  }
+]
