@@ -822,7 +822,75 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;}
 
 
 <style id="rijal-private-admin">
-
+/* PANEL EDIT PRIVAT — hanya muncul setelah PIN benar */
+#adminPanel { display:none !important; }
+#adminGate{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  background:rgba(10,15,20,.72);
+  backdrop-filter:blur(8px);
+  padding:18px;
+}
+#adminGateBox{
+  max-width:420px;
+  margin:12vh auto 0;
+  background:#fff;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 20px 60px rgba(0,0,0,.28);
+}
+#adminGateBox h2{margin:0 0 8px}
+#adminGateBox p{color:#667085;line-height:1.45}
+#adminPin{
+  width:100%;
+  min-height:48px;
+  box-sizing:border-box;
+  padding:12px 14px;
+  border:1px solid #d8dee4;
+  border-radius:12px;
+  font-size:18px;
+  text-align:center;
+  letter-spacing:4px;
+}
+#adminPin:focus{outline:none;border-color:#159447;box-shadow:0 0 0 3px rgba(21,148,71,.1)}
+#adminLoginBtn{width:100%;margin-top:10px}
+#adminCloseBtn{width:100%;margin-top:6px}
+#adminSecretBtn{
+  position:fixed;
+  left:10px;
+  bottom:10px;
+  width:34px;
+  height:34px;
+  opacity:.04;
+  z-index:99998;
+  border:0;
+  background:transparent;
+  font-size:1px;
+}
+#adminSecretBtn:focus{opacity:.18}
+#privateAdminBanner{
+  display:none;
+  position:sticky;
+  top:8px;
+  z-index:9990;
+  margin:0 auto 12px;
+  max-width:980px;
+  padding:10px 14px;
+  border-radius:12px;
+  background:#17212b;
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+}
+body.admin-unlocked #adminPanel{display:block !important}
+body.admin-unlocked #adminGate{display:none !important}
+body.admin-unlocked #privateAdminBanner{display:block}
+@media(max-width:700px){
+  #adminGateBox{margin:18vh auto 0;padding:18px}
+}
+</style>
 
 
 
@@ -1059,8 +1127,39 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;}
   #cars .car .btn{font-size:11px !important;}
 }
 </style>
+
+<style id="rijal-penyerahan-caption-rapi">
+/* Caption publik di bawah setiap foto Penyerahan Unit */
+.handover-caption{
+  padding:8px 6px 10px;
+  text-align:center;
+  font-size:14px;
+  line-height:1.25;
+  font-weight:700;
+  color:var(--text);
+  background:#fff;
+}
+@media(max-width:680px){
+  .handover-caption{font-size:12px;padding:7px 4px 9px;line-height:1.2;}
+}
+</style>
 </head>
 <body id="top">
+<div id="adminGate" aria-hidden="true">
+  <div id="adminGateBox">
+    <h2>🔐 Panel Edit Privat</h2>
+    <p>Panel ini hanya untuk pemilik website. Masukkan PIN untuk membuka pengaturan.</p>
+    <input id="adminPin" type="password" inputmode="numeric" autocomplete="off"
+           maxlength="12" placeholder="Masukkan PIN">
+    <button class="btn wa" id="adminLoginBtn">🔓 Buka Panel Edit</button>
+    <button class="btn light" id="adminCloseBtn">Tutup</button>
+    <p class="note">Panel edit tidak tampil pada halaman publik sampai PIN benar.</p>
+  </div>
+</div>
+<button id="adminSecretBtn" aria-label="Buka Panel Edit">•</button>
+<div id="privateAdminBanner">🔐 MODE EDIT AKTIF — Panel Edit hanya terlihat di perangkat ini <button class="btn light" id="adminLockBtn" style="float:right;padding:7px 10px;min-height:34px">Kunci</button></div>
+
+
 <nav id="rijalQuickNav" aria-label="Navigasi cepat">
   <a href="#top">Beranda</a>
   <a href="#promoBanner">🎉 Lihat Promo</a>
@@ -1142,7 +1241,79 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;}
   <div id="gallery" class="gallery"></div>
 </section>
 
+<section class="card" id="adminPanel">
+<h2>⚙️ Panel Edit</h2>
 
+<details open>
+<summary>Identitas, judul & WhatsApp</summary>
+<label>Judul utama</label><input id="eTitle">
+<label>Subjudul</label><input id="eSubtitle">
+<label>Judul hero</label><input id="eHeroTitle">
+<label>Keterangan hero</label><textarea id="eHeroText"></textarea>
+<label>Nama sales</label><input id="eName">
+<label>Jabatan</label><input id="eRole">
+<label>Dealer</label><input id="eArea">
+<label>Nomor WhatsApp</label><input id="ePhone" inputmode="numeric" placeholder="Contoh: 62812xxxxxxxx">
+</details>
+
+<details>
+<summary>Foto profil & foto utama</summary>
+<label>Foto Bapak / foto profil</label>
+<input type="file" id="profileFile" accept="image/*">
+<label>Foto utama / hero</label>
+<input type="file" id="heroFile" accept="image/*">
+<p class="note">Foto utama adalah gambar besar di bagian paling atas web.</p>
+</details>
+
+<details>
+<summary>✏️ Edit mobil & foto masing-masing mobil</summary>
+<div id="editorCars"></div>
+</details>
+
+<details>
+<summary>➕ Tambah mobil baru</summary>
+<label>Nama mobil / tipe</label><input id="newName">
+<div class="row">
+<div><label>Harga OTR</label><input id="newPrice" placeholder="Rp ..."></div>
+<div><label>DP</label><input id="newDp" placeholder="Mulai Rp ..."></div>
+</div>
+<label>Tenor / keterangan</label><input id="newTenor" placeholder="Contoh: 1-5 tahun">
+<label>Promo</label><input id="newPromo" placeholder="Tanyakan promo terbaru">
+<label>Nama file foto mobil di GitHub</label>
+ <input id="newPhotoPath" placeholder="Contoh: foto/mobil/avanza.jpg">
+ <label>Pratinjau lokal dari HP (opsional)</label>
+ <input type="file" id="newPhoto" accept="image/*">
+<button class="btn" id="addCarBtn">➕ Tambah Mobil</button>
+</details>
+
+<details>
+<summary>🔥 Kelola Promo dengan Cepat</summary>
+<p class="note">Edit promo setiap mobil di sini. Perubahan tersimpan di HP ini saat menekan tombol simpan.</p>
+<div id="quickPromoEditor"></div>
+<button class="btn" id="saveQuickPromoBtn">💾 Simpan Semua Promo</button>
+</details>
+
+<details>
+<summary>🎉 Kelola Foto Promo</summary>
+  <p class="note">Upload satu atau beberapa foto promo. Setiap foto baru otomatis diberi watermark Rijal Kalla Toyota.</p>
+  <input type="file" id="promoFiles" accept="image/*" multiple>
+  <button class="btn" id="addPromoBtn">➕ Tambah Foto Promo</button>
+  <button class="btn light" id="clearPromoBtn">🗑️ Hapus Semua Foto Promo</button>
+</details>
+
+<details>
+<summary>📸 Kelola Penyerahan Unit</summary>
+<label>Tambah satu atau beberapa foto</label>
+<input type="file" id="galleryFiles" accept="image/*" multiple>
+<p class="note">💧 Watermark “Rijal Kalla Toyota” dipasang otomatis pada setiap foto baru.</p>
+<button class="btn" id="addGalleryBtn">➕ Tambah ke Galeri</button>
+</details>
+
+<button class="btn" id="saveBtn">💾 Simpan Perubahan</button>
+<button class="btn" id="exportBtn">⬇️ Simpan Website untuk Upload ke GitHub</button>
+<button class="btn light" id="resetBtn">↺ Kembalikan Data Awal</button>
+<p class="note">Perubahan dan foto tersimpan di HP ini. Jika ingin perubahan ikut tampil di website publik, tekan "Simpan Website untuk Upload ke GitHub", lalu upload file HTML hasilnya sebagai index.html di GitHub.</p>
+</section>
 </main>
 
 <a id="stickyWa" class="stickywa" href="#" target="_blank" rel="noopener">💬 Tanya Toyota via WhatsApp</a>
@@ -1298,12 +1469,17 @@ function defaultData(){
 const DB="RijalToyotaMiniDB", STORE="data", KEY="main";
 const HERO_IMAGE_VERSION="2026-09-05-rijal-hero-v1";
 
-/* Foto permanen website. */
+/* Foto permanen website: upload foto ke folder images di GitHub,
+   lalu isi nama file/path pada Panel Edit. */
 const SITE_IMAGE_BASE="./images/";
 function siteImg(path){
   if(!path) return "";
-  if(/^https?:\/\//i.test(path) || /^data:/i.test(path)) return path;
-  return SITE_IMAGE_BASE + path.replace(/^\/+/, "");
+  const p=String(path).replace(/^\/+/, "");
+  if(/^https?:\/\//i.test(p) || /^data:/i.test(p)) return p;
+  // Path GitHub: foto/... berada di root repository, bukan di /images/.
+  if(/^foto\//i.test(p)) return "./" + p;
+  if(/^images\//i.test(p)) return "./" + p;
+  return SITE_IMAGE_BASE + p;
 }
 
 /* KATALOG EKSTERNAL: jika data-mobil.json tersedia di GitHub, katalog mobil
@@ -1411,7 +1587,7 @@ async function load(){
   d.heroVersion=HERO_IMAGE_VERSION;
   await dbSet(d);
  }
- if(!Array.isArray(d.promoPhotos)) d.promoPhotos = (Array.isArray(exported && exported.promoPhotos) ? exported.promoPhotos.slice() : []);
+ if(!Array.isArray(d.promoPhotos) || d.promoPhotos.length===0) d.promoPhotos = (Array.isArray(exported && exported.promoPhotos) && exported.promoPhotos.length ? exported.promoPhotos.slice() : ["foto/promo/Sales Program Sept.png"]);
  if(!Array.isArray(d.cars)) d.cars=[];
  const existingByName=new Map(d.cars.map(c=>[(c&&c.name||"").trim().toUpperCase(),c]));
  for(const [name,price] of INITIAL_CARS){
@@ -1532,7 +1708,7 @@ function render(){
  </article>`).join('') || '<div class="empty">Mobil tidak ditemukan.</div>';
 
  els.gallery.innerHTML=data.gallery.length?data.gallery.map((g,i)=>`
- <div class="gallery-item"><img src="${g.startsWith("data:")||g.startsWith("http")?g:siteImg(g)}" alt="Penyerahan unit"><button class="btn light" data-delgallery="${i}">Hapus</button></div>`).join("")
+ <div class="gallery-item"><img src="${g.startsWith("data:")||g.startsWith("http")?g:siteImg(g)}" alt="Penyerahan unit"><div class="handover-caption">🤝 Penyerahan Unit • Rijal Kalla Toyota</div><button class="btn light" data-delgallery="${i}">Hapus</button></div>`).join("")
  : '<div class="empty">Belum ada foto penyerahan unit.</div>';
 
  const promoBox = document.getElementById("promoPhotoGallery");
@@ -1690,7 +1866,7 @@ $("leadBtn").addEventListener("click",()=>{
   const budget=$("leadBudget").value.trim();
   const note=$("leadNote").value.trim();
   let n=(data.phone||"").replace(/\D/g,""); if(n.startsWith("0")) n="62"+n.slice(1); else if(n.startsWith("8")) n="62"+n;
-  if(!n){alert("Nomor WhatsApp sales belum diisi.");return;}
+  if(!n){alert("Nomor WhatsApp sales belum diisi di Panel Edit.");return;}
   const msg=`Halo Pak Rijal, saya ingin informasi Toyota.%0A%0ANama: ${encodeURIComponent(name||"-")}%0ANo. WA: ${encodeURIComponent(phone||"-")}%0AMobil: ${encodeURIComponent(car||"-")}%0ABudget/DP: ${encodeURIComponent(budget||"-")}%0AKeterangan: ${encodeURIComponent(note||"-")}`;
   window.open("https://wa.me/"+n+"?text="+msg,"_blank");
 });
@@ -1805,7 +1981,59 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 
 
+<script id="rijal-private-admin-script">
+(function(){
+  // PIN can be changed here by the owner. Default PIN is 2468.
+  const ADMIN_PIN = "1717";
+  const gate = document.getElementById("adminGate");
+  const pin = document.getElementById("adminPin");
+  const login = document.getElementById("adminLoginBtn");
+  const close = document.getElementById("adminCloseBtn");
+  const secret = document.getElementById("adminSecretBtn");
+  const lock = document.getElementById("adminLockBtn");
 
+  function openGate(){
+    gate.style.display="block";
+    gate.setAttribute("aria-hidden","false");
+    setTimeout(()=>pin && pin.focus(),80);
+  }
+  function unlock(){
+    if(pin && pin.value === ADMIN_PIN){
+      document.body.classList.add("admin-unlocked");
+      gate.style.display="none";
+      gate.setAttribute("aria-hidden","true");
+      if(pin) pin.value="";
+      window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+    }else{
+      alert("PIN salah.");
+      if(pin){ pin.value=""; pin.focus(); }
+    }
+  }
+  function doLock(){
+    document.body.classList.remove("admin-unlocked");
+    gate.style.display="block";
+    gate.setAttribute("aria-hidden","false");
+    if(pin){pin.value="";pin.focus();}
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  // Public view starts with the private gate hidden.
+  // The owner can open it from the secret admin button.
+  document.body.classList.remove("admin-unlocked");
+  gate.style.display="none";
+
+  if(login) login.addEventListener("click",unlock);
+  if(close) close.addEventListener("click",()=>{gate.style.display="none";gate.setAttribute("aria-hidden","true");});
+  if(secret) secret.addEventListener("click",openGate);
+  if(lock) lock.addEventListener("click",doLock);
+  if(pin) pin.addEventListener("keydown",e=>{if(e.key==="Enter")unlock();});
+
+  // Prevent accidental opening from common keyboard shortcuts.
+  document.addEventListener("keydown", function(e){
+    if((e.ctrlKey||e.metaKey) && ["u","s"].includes(e.key.toLowerCase())) e.preventDefault();
+  });
+})();
+</script>
 
 
 <!-- FINAL: tampilan foto mobil saat diklik -->
@@ -1897,97 +2125,6 @@ document.addEventListener("DOMContentLoaded", function(){
 })();
 </script>
 
-
-<!-- PROMO PUBLIK: membaca semua gambar langsung dari folder foto/promo/ di GitHub -->
-<script id="rijal-public-promo-folder-js">
-(function(){
-  const PROMO_FOLDER_API='https://api.github.com/repos/RIJALTOYOTA/rijal-toyota-web/contents/foto/promo';
-  const IMAGE_EXT=/\.(jpe?g|png|webp|gif|avif)$/i;
-
-  function escPromo(v){
-    return String(v||'').replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});
-  }
-
-  async function loadPromoFolder(){
-    const box=document.getElementById('promoPhotoGallery');
-    if(!box) return;
-    try{
-      const r=await fetch(PROMO_FOLDER_API+'?v='+Date.now(),{cache:'no-store'});
-      if(!r.ok) throw new Error('GitHub promo folder tidak dapat dibaca');
-      const files=await r.json();
-      const promos=Array.isArray(files) ? files.filter(function(f){
-        return f && f.type==='file' && IMAGE_EXT.test(String(f.name||''));
-      }) : [];
-
-      if(!promos.length){
-        /* Biarkan data promo lama tetap tampil bila folder masih kosong. */
-        return;
-      }
-
-      box.innerHTML=promos.map(function(f){
-        const src=f.download_url || ('./foto/promo/'+encodeURIComponent(f.name));
-        return '<div class="promo-photo-card">'
-          +'<img src="'+escPromo(src)+'" alt="'+escPromo(f.name)+'" loading="lazy">'
-          +'<div class="promo-photo-caption">🎉 '+escPromo(f.name)+'</div>'
-          +'</div>';
-      }).join('');
-
-      /* Tandai foto baru agar lightbox yang sudah ada ikut bekerja. */
-      box.querySelectorAll('img').forEach(function(img){
-        img.classList.add('rijal-photo-click');
-        img.setAttribute('title','Ketuk foto untuk melihat promo lebih besar');
-        img.setAttribute('role','button');
-        img.setAttribute('tabindex','0');
-      });
-    }catch(e){
-      /* Jika API GitHub gagal, jangan merusak website; galeri bawaan tetap dipakai. */
-      console.warn('Promo folder GitHub:',e);
-    }
-  }
-
-  loadPromoFolder();
-})();
-</script>
-
-
-<!-- PENYERAHAN PUBLIK: membaca semua gambar langsung dari folder foto/penyerahan/ di GitHub -->
-<script id="rijal-public-gallery-folder-js">
-(function(){
-  const GALLERY_FOLDER_API='https://api.github.com/repos/RIJALTOYOTA/rijal-toyota-web/contents/foto/penyerahan';
-  const IMAGE_EXT=/\.(jpe?g|png|webp|gif|avif)$/i;
-  function escGallery(v){
-    return String(v||'').replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});
-  }
-  async function loadGalleryFolder(){
-    const box=document.getElementById('gallery');
-    if(!box) return;
-    try{
-      const r=await fetch(GALLERY_FOLDER_API+'?v='+Date.now(),{cache:'no-store'});
-      if(!r.ok) throw new Error('GitHub folder penyerahan tidak dapat dibaca');
-      const files=await r.json();
-      const photos=Array.isArray(files) ? files.filter(function(f){
-        return f && f.type==='file' && IMAGE_EXT.test(String(f.name||''));
-      }) : [];
-      if(!photos.length) return;
-      box.innerHTML=photos.map(function(f){
-        const src=f.download_url || ('./foto/penyerahan/'+encodeURIComponent(f.name));
-        return '<div class="gallery-item">'
-          +'<img src="'+escGallery(src)+'" alt="Penyerahan unit" loading="lazy" title="Ketuk foto untuk melihat lebih besar">'
-          +'<div class="promo-photo-caption">🤝 Penyerahan Unit • Rijal Kalla Toyota</div>'
-          +'</div>';
-      }).join('');
-      box.querySelectorAll('img').forEach(function(img){
-        img.classList.add('rijal-photo-click');
-        img.setAttribute('role','button');
-        img.setAttribute('tabindex','0');
-      });
-    }catch(e){
-      console.warn('Folder penyerahan GitHub:',e);
-    }
-  }
-  loadGalleryFolder();
-})();
-</script>
 </body>
 </html>
 
