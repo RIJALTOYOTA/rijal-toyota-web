@@ -1,0 +1,412 @@
+[
+  {
+    "nama": "AGYA",
+    "foto": "agya.png",
+    "tipe": [
+      {
+        "tipe": "1.2 E M/T",
+        "harga": "Rp192.900.000"
+      },
+      {
+        "tipe": "1.2 G M/T",
+        "harga": "Rp200.700.000"
+      },
+      {
+        "tipe": "1.2 G CVT",
+        "harga": "Rp217.300.000"
+      },
+      {
+        "tipe": "1.2 G CVT STYLIX WITH GR AERO PACKAGE",
+        "harga": "Rp220.900.000"
+      }
+    ]
+  },
+  {
+    "nama": "CALYA",
+    "foto": "calya.jpg",
+    "tipe": [
+      {
+        "tipe": "1.2 E STD M/T",
+        "harga": "Rp196.300.000"
+      },
+      {
+        "tipe": "1.2 E M/T",
+        "harga": "Rp199.300.000"
+      },
+      {
+        "tipe": "1.2 G M/T",
+        "harga": "Rp208.300.000"
+      },
+      {
+        "tipe": "1.2 G CVT",
+        "harga": "Rp220.000.000"
+      }
+    ]
+  },
+  {
+    "nama": "AVANZA",
+    "foto": "avanza.jpg",
+    "tipe": [
+      {
+        "tipe": "1.3 E M/T",
+        "harga": "Rp267.000.000"
+      },
+      {
+        "tipe": "1.3 E CVT",
+        "harga": "Rp282.000.000"
+      },
+      {
+        "tipe": "1.5 G M/T",
+        "harga": "Rp290.800.000"
+      },
+      {
+        "tipe": "1.5 G CVT",
+        "harga": "Rp305.300.000"
+      }
+    ]
+  },
+  {
+    "nama": "RAIZE",
+    "foto": "raize.jpg",
+    "tipe": [
+      {
+        "tipe": "RAIZE 1.2 G (MANUAL)",
+        "harga": "Rp262.100.000"
+      },
+      {
+        "tipe": "RAIZE 1.2 G (METIC)",
+        "harga": "Rp277.400.000"
+      },
+      {
+        "tipe": "RAIZE 1.0 T G (MANUAL) ONE TONE",
+        "harga": "Rp282.700.000"
+      },
+      {
+        "tipe": "RAIZE 1.0 T G (METIC) ONE TONE",
+        "harga": "Rp297.600.000"
+      },
+      {
+        "tipe": "RAIZE 1.0 T GR SPORT (METIC) ONE TONE",
+        "harga": "Rp311.900.000"
+      },
+      {
+        "tipe": "RAIZE 1.0 T GR SPORT (METIC) TWO TONE",
+        "harga": "Rp314.900.000"
+      },
+      {
+        "tipe": "RAIZE 1.0 T GR SPORT (METIC) TWO TONE TSS",
+        "harga": "Rp337.900.000"
+      }
+    ]
+  },
+  {
+    "nama": "RUSH",
+    "foto": "rush.jpg",
+    "tipe": [
+      {
+        "tipe": "RUSH 1.5 G (MANUAL)",
+        "harga": "Rp317.000.000"
+      },
+      {
+        "tipe": "RUSH 1.5 G (METIC)",
+        "harga": "Rp328.500.000"
+      },
+      {
+        "tipe": "RUSH 1.5 GR SPORT (MANUAL)",
+        "harga": "Rp336.900.000"
+      },
+      {
+        "tipe": "RUSH 1.5 GR SPORT (METIC)",
+        "harga": "Rp348.400.000"
+      }
+    ]
+  },
+  {
+    "nama": "VELOZ",
+    "foto": "veloz.jpg",
+    "tipe": [
+      {
+        "tipe": "VELOZ 1.5 V HV",
+        "harga": "Rp313.000.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 V HV PC",
+        "harga": "Rp314.500.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV",
+        "harga": "Rp335.000.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV PC",
+        "harga": "Rp336.500.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV MODELISTA",
+        "harga": "Rp360.000.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV MODELISTA PC",
+        "harga": "Rp361.500.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV MODELISTA TT",
+        "harga": "Rp362.500.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV MODELISTA TT PC",
+        "harga": "Rp364.000.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV TSS MODELISTA",
+        "harga": "Rp395.000.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV TSS MODELISTA PC",
+        "harga": "Rp396.500.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV TSS MODELISTA TT",
+        "harga": "Rp397.500.000"
+      },
+      {
+        "tipe": "VELOZ 1.5 Q HV TSS MODELISTA TT PC",
+        "harga": "Rp399.000.000"
+      }
+    ]
+  },
+  {
+    "nama": "INNOVA",
+    "foto": "innova.jpg",
+    "tipe": [
+      {
+        "tipe": "INNOVA 2.4 G (MANUAL) DIESEL",
+        "harga": "Rp458.400.000"
+      },
+      {
+        "tipe": "INNOVA 2.4 G (METIC) DIESEL",
+        "harga": "Rp479.400.000"
+      }
+    ]
+  },
+  {
+    "nama": "YARIS CROSS",
+    "foto": "yaris-cross.jpg",
+    "tipe": [
+      {
+        "tipe": "1.5 G (MANUAL)",
+        "harga": "Rp381.500.000"
+      },
+      {
+        "tipe": "1.5 G (METIC)",
+        "harga": "Rp395.200.000"
+      },
+      {
+        "tipe": "1.5 S (METIC) TSS",
+        "harga": "Rp440.200.000"
+      },
+      {
+        "tipe": "1.5 S (METIC) TSS PC",
+        "harga": "Rp442.800.000"
+      },
+      {
+        "tipe": "1.5 S (METIC) TSS GR SPORT",
+        "harga": "Rp450.100.000"
+      },
+      {
+        "tipe": "1.5 S (METIC) TSS GR SPORT PC",
+        "harga": "Rp453.100.000"
+      },
+      {
+        "tipe": "1.5 S HV (METIC) TSS GR SPORT",
+        "harga": "Rp482.600.000"
+      },
+      {
+        "tipe": "1.5 S HV (METIC) TSS GR SPORT PC",
+        "harga": "Rp487.300.000"
+      },
+      {
+        "tipe": "1.5 S HV (METIC) TSS GR SPORT TWO TONE",
+        "harga": "Rp486.600.000"
+      },
+      {
+        "tipe": "1.5 S HV (METIC) TSS GR SPORT TWO TONE PC",
+        "harga": "Rp487.500.000"
+      }
+    ]
+  },
+  {
+    "nama": "FORTUNER",
+    "foto": "fortuner.png",
+    "tipe": [
+      {
+        "tipe": "FORTUNER 2.8 VRZ GR. S 4X2 TSS.",
+        "harga": "Rp708.200.000"
+      },
+      {
+        "tipe": "FORTUNER 2.8 VRZ GR. S 4X2 TSS. (PC)",
+        "harga": "Rp711.300.000"
+      },
+      {
+        "tipe": "FORTUNER 2.8 VRZ GR. S 4X2 TSS. (PC) (TT)",
+        "harga": "Rp713.400.000"
+      },
+      {
+        "tipe": "FORTUNER 2.8 VRZ 4X4 AT",
+        "harga": "Rp796.500.000"
+      },
+      {
+        "tipe": "FORTUNER 2.8 VRZ 4X4 AT GR. S TSS.",
+        "harga": "Rp823.300.000"
+      },
+      {
+        "tipe": "FORTUNER 2.8 VRZ 4X4 AT GR. S TSS. (PC) (TT)",
+        "harga": "Rp828.400.000"
+      },
+      {
+        "tipe": "FORTUNER 2.4 G 4X2 MT",
+        "harga": "Rp612.300.000"
+      },
+      {
+        "tipe": "FORTUNER 2.4 G 4X2 AT",
+        "harga": "Rp630.400.000"
+      },
+      {
+        "tipe": "FORTUNER 2.8 VRZ 4X2 AT",
+        "harga": "Rp685.700.000"
+      },
+      {
+        "tipe": "FORTUNER 2.8 VRZ 4X2 AT [NON RSE]",
+        "harga": "Rp678.600.000"
+      },
+      {
+        "tipe": "FORTUNER 2.8 VRZ TSS 4X2 AT",
+        "harga": "Rp703.100.000"
+      },
+      {
+        "tipe": "FORTUNER 2.7 SRZ 4X2 AT",
+        "harga": "Rp653.500.000"
+      },
+      {
+        "tipe": "FORTUNER 2.7 SRZ GR 4X2 AT",
+        "harga": "Rp663.300.000"
+      },
+      {
+        "tipe": "FORTUNER 2.7 SRZ GR 4X2 AT PC",
+        "harga": "Rp666.500.000"
+      },
+      {
+        "tipe": "FORTUNER 2.7 SRZ GR 4X2 AT PC TT",
+        "harga": "Rp668.600.000"
+      },
+      {
+        "tipe": "FORTUNER 2.7 SRZ GR 4X2 AT [NON RSE]",
+        "harga": "Rp656.600.000"
+      }
+    ]
+  },
+  {
+    "nama": "HILUX RANGGA",
+    "foto": "hilux-rangga.png",
+    "tipe": [
+      {
+        "tipe": "RANGGA PU. 2.0 STD. 2WAY (MANUAL)",
+        "harga": "Rp214.600.000"
+      },
+      {
+        "tipe": "RANGGA PU. 2.0 STD. 3WAY (MANUAL)",
+        "harga": "Rp215.800.000"
+      },
+      {
+        "tipe": "RANGGA PU. 2.4 STD. 2WAY (MANUAL) DIESEL",
+        "harga": "Rp271.000.000"
+      },
+      {
+        "tipe": "RANGGA PU. 2.4 STD. 3WAY (MANUAL) DIESEL",
+        "harga": "Rp272.000.000"
+      },
+      {
+        "tipe": "RANGGA PU. 2.4 HIGHWAY (MANUAL) DIESEL",
+        "harga": "Rp304.700.000"
+      },
+      {
+        "tipe": "RANGGA PU. 2.4 HIGHWAY (METIC) DIESEL",
+        "harga": "Rp327.600.000"
+      }
+    ]
+  },
+  {
+    "nama": "HILUX PICKUP",
+    "foto": "hilux-pickup.png",
+    "tipe": [
+      {
+        "tipe": "NEW HILUX 2.8 DSL PICK UP 4X4 M/T",
+        "harga": "Rp436.500.000"
+      }
+    ]
+  },
+  {
+    "nama": "HILUX DOUBLE CABIN",
+    "foto": "hilux-double-cabin.png",
+    "tipe": [
+      {
+        "tipe": "HILUX DC 2.4 G 4X4 (MANUAL) DIESEL",
+        "harga": "Rp535.500.000"
+      },
+      {
+        "tipe": "HILUX DC 2.4 V 4X4 (METIC) DIESEL",
+        "harga": "Rp604.900.000"
+      },
+      {
+        "tipe": "HILUX DC BEV 4X4",
+        "harga": "Rp1.032.000.000"
+      }
+    ]
+  },
+  {
+    "nama": "INNOVA ZENIX",
+    "foto": "innova-zenix.png",
+    "tipe": [
+      {
+        "tipe": "ZENIX 2.0 G (METIC)",
+        "harga": "Rp467.500.000"
+      },
+      {
+        "tipe": "ZENIX 2.0 G (METIC) PC",
+        "harga": "Rp470.500.000"
+      },
+      {
+        "tipe": "ZENIX 2.0 G HV (METIC)",
+        "harga": "Rp516.900.000"
+      },
+      {
+        "tipe": "ZENIX 2.0 G HV (METIC) PC",
+        "harga": "Rp519.900.000"
+      },
+      {
+        "tipe": "ZENIX 2.0 V (METIC)",
+        "harga": "Rp516.300.000"
+      },
+      {
+        "tipe": "ZENIX 2.0 V (METIC) PC",
+        "harga": "Rp519.400.000"
+      },
+      {
+        "tipe": "ZENIX 2.0 V HV (METIC) MODELISTA",
+        "harga": "Rp592.900.000"
+      },
+      {
+        "tipe": "ZENIX 2.0 V HV (METIC) MODELISTA PC",
+        "harga": "Rp595.900.000"
+      },
+      {
+        "tipe": "ZENIX 2.0 Q HV (METIC) MODELISTA",
+        "harga": "Rp673.500.000"
+      },
+      {
+        "tipe": "ZENIX 2.0 Q HV (METIC) MODELISTA PC",
+        "harga": "Rp676.700.000"
+      }
+    ]
+  }
+]
