@@ -2326,6 +2326,147 @@ document.addEventListener("DOMContentLoaded", function(){
 })();
 </script>
 
+
+<style id="rijal-harga-rapi-final">
+/* FINAL FIX: kartu harga mobil kembali rapi di HP */
+#cars{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:13px !important;
+  align-items:stretch !important;
+}
+#cars .car{
+  min-width:0 !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+}
+#cars .rijal-compact-variants .car-variant-row{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto !important;
+  gap:6px !important;
+  align-items:center !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+  padding:6px 0 !important;
+  font-size:12px !important;
+  line-height:1.2 !important;
+}
+#cars .rijal-compact-variants .car-variant-row span{
+  min-width:0 !important;
+  display:block !important;
+  white-space:normal !important;
+  overflow-wrap:normal !important;
+  word-break:normal !important;
+}
+#cars .rijal-compact-variants .car-variant-row strong{
+  min-width:max-content !important;
+  display:block !important;
+  margin:0 !important;
+  text-align:right !important;
+  font-size:12px !important;
+  line-height:1.15 !important;
+  white-space:nowrap !important;
+}
+#cars .car .price{
+  display:block !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+  padding:7px 8px !important;
+  margin:5px 0 7px !important;
+  font-size:15px !important;
+  line-height:1.2 !important;
+  font-weight:800 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+@media(max-width:700px){
+  #cars{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:10px !important;
+  }
+  #cars .car{padding:8px !important;}
+  #cars .car img{height:125px !important;min-height:125px !important;max-height:125px !important;}
+  #cars .car h3{font-size:15px !important;line-height:1.2 !important;min-height:0 !important;}
+  #cars .rijal-compact-variants .car-variant-row{font-size:11.5px !important;padding:5px 0 !important;}
+  #cars .rijal-compact-variants .car-variant-row strong{font-size:11.5px !important;}
+  #cars .car .price{font-size:14px !important;}
+}
+@media(max-width:390px){
+  #cars{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px !important;}
+  #cars .car{padding:7px !important;}
+  #cars .car img{height:110px !important;min-height:110px !important;max-height:110px !important;}
+  #cars .rijal-compact-variants .car-variant-row{font-size:10.5px !important;gap:4px !important;}
+  #cars .rijal-compact-variants .car-variant-row strong{font-size:10.5px !important;}
+  #cars .car .price{font-size:13px !important;padding:5px 6px !important;}
+}
+</style>
+
+
+<style id="rijal-mobile-price-repair-final">
+@media(max-width:700px){
+  #cars .cars-grid,#cars .car-grid,#cars .cars-list,#cars{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:8px !important;}
+  #cars .car{padding:8px !important;min-width:0 !important;}
+  #cars .car img{height:110px !important;min-height:110px !important;max-height:110px !important;object-fit:contain !important;}
+  #cars .car h3{font-size:15px !important;line-height:1.2 !important;min-height:34px !important;}
+  #cars .rijal-compact-variants .car-variant-row{display:grid !important;grid-template-columns:minmax(0,1fr) auto !important;gap:5px !important;align-items:center !important;}
+  #cars .rijal-compact-variants .car-variant-row span{white-space:normal !important;overflow-wrap:anywhere !important;word-break:normal !important;}
+  #cars .rijal-compact-variants .car-variant-row strong{font-size:11px !important;white-space:nowrap !important;text-align:right !important;}
+  #cars .car .price{font-size:14px !important;white-space:nowrap !important;overflow:hidden !important;text-overflow:ellipsis !important;}
+}
+</style>
+
+<!-- PROMO PUBLIK: membaca semua gambar langsung dari folder foto/promo/ di GitHub -->
+<script id="rijal-public-promo-folder-js">
+(function(){
+  const PROMO_FOLDER_API='https://api.github.com/repos/RIJALTOYOTA/rijal-toyota-web/contents/foto/promo';
+  const IMAGE_EXT=/\.(jpe?g|png|webp|gif|avif)$/i;
+
+  function escPromo(v){
+    return String(v||'').replace(/[&<>"']/g,function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});
+  }
+
+  async function loadPromoFolder(){
+    const box=document.getElementById('promoPhotoGallery');
+    if(!box) return;
+    try{
+      const r=await fetch(PROMO_FOLDER_API+'?v='+Date.now(),{cache:'no-store'});
+      if(!r.ok) throw new Error('GitHub promo folder tidak dapat dibaca');
+      const files=await r.json();
+      const promos=Array.isArray(files) ? files.filter(function(f){
+        return f && f.type==='file' && IMAGE_EXT.test(String(f.name||''));
+      }) : [];
+
+      if(!promos.length){
+        /* Biarkan data promo lama tetap tampil bila folder masih kosong. */
+        return;
+      }
+
+      box.innerHTML=promos.map(function(f){
+        const src=f.download_url || ('./foto/promo/'+encodeURIComponent(f.name));
+        return '<div class="promo-photo-card">'
+          +'<img src="'+escPromo(src)+'" alt="'+escPromo(f.name)+'" loading="lazy">'
+          +'<div class="promo-photo-caption">🎉 '+escPromo(f.name)+'</div>'
+          +'</div>';
+      }).join('');
+
+      /* Tandai foto baru agar lightbox yang sudah ada ikut bekerja. */
+      box.querySelectorAll('img').forEach(function(img){
+        img.classList.add('rijal-photo-click');
+        img.setAttribute('title','Ketuk foto untuk melihat promo lebih besar');
+        img.setAttribute('role','button');
+        img.setAttribute('tabindex','0');
+      });
+    }catch(e){
+      /* Jika API GitHub gagal, jangan merusak website; galeri bawaan tetap dipakai. */
+      console.warn('Promo folder GitHub:',e);
+    }
+  }
+
+  loadPromoFolder();
+})();
+</script>
 </body>
 </html>
 
