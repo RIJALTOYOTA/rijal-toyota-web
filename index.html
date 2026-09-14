@@ -1201,7 +1201,7 @@ body.admin-unlocked #privateAdminBanner{display:block}
     <p id="heroText" class="muted">Tanyakan harga, promo, dan simulasi kepada saya. Informasi dapat berubah sesuai program yang berlaku.</p>
     <a id="heroWa" class="btn wa" href="#" target="_blank" rel="noopener">💬 Tanya via WhatsApp</a>
   </div>
-  <img id="heroImg" alt="Foto utama">
+  <img id="heroImg" alt="Foto utama" fetchpriority="high" decoding="async">
 </section>
 
 <section class="adbar">
@@ -1246,7 +1246,7 @@ body.admin-unlocked #privateAdminBanner{display:block}
 </section>
 
 <section class="card profile" id="profile">
-  <img id="profileImg" alt="Foto sales">
+  <img id="profileImg" alt="Foto sales" loading="lazy" decoding="async">
   <div>
     <h2 id="salesName">Rijal</h2>
     <p id="salesRole">Sales Consultant Toyota</p>
@@ -1736,7 +1736,7 @@ function render(){
    promoBox.innerHTML = promoList.length ? promoList.map((g,i)=>{
      const src = (String(g).startsWith("data:") || String(g).startsWith("http")) ? g : siteImg(g);
      return `<div class="promo-photo-card">
-       <img src="${src}" alt="Promo Toyota" loading="lazy">
+       <img src="${src}" alt="Promo Toyota" loading="lazy" decoding="async">
        <div class="promo-photo-caption">Promo Toyota • Rijal Kalla Toyota</div>
      </div>`;
    }).join("") : '<div class="empty">Belum ada foto promo.</div>';
@@ -1946,7 +1946,7 @@ $("resetBtn").addEventListener("click",async()=>{
       const tenor=val(c,["tenor"]) || "Tanyakan";
       const promo=val(c,["promo"]) || "Promo terbaru — tanyakan ke sales";
       return `<article class="promo-card">
-        ${img ? `<img src="${img}" alt="${name}" loading="lazy">` : ""}
+        ${img ? `<img src="${img}" alt="${name}" loading="lazy" decoding="async">` : ""}
         <div class="promo-body">
           <h3>${name}</h3>
           <div class="promo-row"><b>Harga OTR:</b> ${price}</div>
@@ -2446,7 +2446,7 @@ document.addEventListener("DOMContentLoaded", function(){
       box.innerHTML=promos.map(function(f){
         const src=f.download_url || ('./foto/promo/'+encodeURIComponent(f.name));
         return '<div class="promo-photo-card">'
-          +'<img src="'+escPromo(src)+'" alt="'+escPromo(f.name)+'" loading="lazy">'
+          +'<img src="'+escPromo(src)+'" alt="'+escPromo(f.name)+'" loading="lazy" decoding="async">'
           +'<div class="promo-photo-caption">🎉 '+escPromo(f.name)+'</div>'
           +'</div>';
       }).join('');
@@ -2599,7 +2599,7 @@ document.addEventListener("DOMContentLoaded", function(){
       const src=x.download_url;
       const label=niceName(x.name);
       return '<div class="penyerahan-public-card">'
-        +'<img src="'+src+'" alt="Penyerahan unit" loading="lazy">'
+        +'<img src="'+src+'" alt="Penyerahan unit" loading="lazy" decoding="async">'
         +'<div class="penyerahan-public-caption">🤝 Penyerahan Unit • '+label+'</div>'
         +'</div>';
     }).join('');
@@ -2652,3 +2652,59 @@ document.addEventListener("DOMContentLoaded", function(){
   new MutationObserver(clean).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
+
+
+<style id="rijal-light-performance-final">
+/* Ringan saat loading tanpa menurunkan kualitas/resolusi gambar */
+#penyerahanGallery img{
+  object-fit:contain !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:260px !important;
+  display:block !important;
+  background:#f3f5f6 !important;
+}
+@media(max-width:700px){
+  #penyerahanGallery img{
+    max-height:180px !important;
+  }
+}
+</style>
+<script id="rijal-light-load-final">
+(function(){
+  // Beri jeda rendering yang ringan untuk gambar yang muncul jauh di bawah layar.
+  if ("IntersectionObserver" in window) {
+    document.querySelectorAll("#penyerahanGallery img, #promoPhotoGallery img").forEach(function(img){
+      img.decoding = "async";
+    });
+  }
+})();
+</script>
+
+
+<style id="rijal-penyerahan-teks-proporsional">
+/* Penyesuaian nyata pada file website: teks tidak terlalu kecil */
+#penyerahanGallery .penyerahan-photo-caption,
+#penyerahanGallery .handover-photo-caption{
+  font-size:12px !important;
+  line-height:1.25 !important;
+  font-weight:600 !important;
+  padding:6px 4px 7px !important;
+  color:#68727d !important;
+  text-align:center !important;
+}
+@media(max-width:700px){
+  #penyerahanGallery .penyerahan-photo-caption,
+  #penyerahanGallery .handover-photo-caption{
+    font-size:11px !important;
+    line-height:1.2 !important;
+    padding:5px 3px 6px !important;
+  }
+}
+@media(max-width:390px){
+  #penyerahanGallery .penyerahan-photo-caption,
+  #penyerahanGallery .handover-photo-caption{
+    font-size:10.5px !important;
+  }
+}
+</style>
