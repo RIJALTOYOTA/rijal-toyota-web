@@ -2541,3 +2541,72 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 })();
 </script>
+
+
+<style id="rijal-penyerahan-gallery-fix-final">
+#gallery{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:10px !important;
+}
+#gallery .penyerahan-public-card{
+  overflow:hidden;
+  border-radius:12px;
+  background:#f4f6f8;
+  box-shadow:0 2px 9px rgba(0,0,0,.06);
+}
+#gallery .penyerahan-public-card img{
+  display:block;
+  width:100% !important;
+  height:170px !important;
+  object-fit:cover !important;
+  border-radius:12px 12px 0 0 !important;
+}
+#gallery .penyerahan-public-caption{
+  padding:5px 4px 6px;
+  text-align:center;
+  font-size:9px;
+  line-height:1.15;
+  font-weight:500;
+  color:#687482;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+@media(max-width:700px){
+  #gallery{gap:6px !important;}
+  #gallery .penyerahan-public-card{border-radius:9px;}
+  #gallery .penyerahan-public-card img{height:112px !important;border-radius:9px 9px 0 0 !important;}
+  #gallery .penyerahan-public-caption{font-size:8px;padding:4px 2px 5px;}
+}
+@media(max-width:390px){
+  #gallery .penyerahan-public-card img{height:105px !important;}
+  #gallery .penyerahan-public-caption{font-size:7.5px;}
+}
+</style>
+<script id="rijal-github-penyerahan-loader-final">
+(function(){
+  const API='https://api.github.com/repos/RIJALTOYOTA/rijal-toyota-web/contents/foto/penyerahan';
+  const g=document.getElementById('gallery');
+  if(!g)return;
+  function niceName(name){
+    return String(name||'Penyerahan Unit').replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim() || 'Penyerahan Unit';
+  }
+  function render(items){
+    const imgs=items.filter(x=>x && x.type==='file' && /\.(jpe?g|png|webp|gif|avif)$/i.test(x.name||''));
+    if(!imgs.length)return;
+    g.innerHTML=imgs.map(function(x){
+      const src=x.download_url;
+      const label=niceName(x.name);
+      return '<div class="penyerahan-public-card">'
+        +'<img src="'+src+'" alt="Penyerahan unit" loading="lazy">'
+        +'<div class="penyerahan-public-caption">🤝 Penyerahan Unit • '+label+'</div>'
+        +'</div>';
+    }).join('');
+  }
+  fetch(API+'?t='+Date.now(),{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('GitHub API '+r.status);return r.json();})
+    .then(render)
+    .catch(function(){ /* biarkan data lokal jika GitHub gagal */ });
+})();
+</script>
