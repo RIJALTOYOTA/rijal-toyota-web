@@ -2600,7 +2600,7 @@ document.addEventListener("DOMContentLoaded", function(){
       const label=niceName(x.name);
       return '<div class="penyerahan-public-card">'
         +'<img src="'+src+'" alt="Penyerahan unit" loading="lazy" decoding="async">'
-        +'<div class="penyerahan-public-caption">🤝 Penyerahan Unit • '+label+'</div>'
+        +'<div class="penyerahan-public-caption">🤝 Penyerahan Unit</div>'
         +'</div>';
     }).join('');
   }
@@ -2706,5 +2706,55 @@ document.addEventListener("DOMContentLoaded", function(){
   #penyerahanGallery .handover-photo-caption{
     font-size:10.5px !important;
   }
+}
+</style>
+
+
+<style id="rijal-penyerahan-final-real">
+/* FINAL: foto penyerahan utuh + teks proporsional */
+#gallery .penyerahan-public-card{
+  overflow:hidden !important;
+  border-radius:12px !important;
+  background:#f4f6f8 !important;
+  box-shadow:0 2px 9px rgba(0,0,0,.06) !important;
+}
+#gallery .penyerahan-public-card img{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-height:220px !important;
+  object-fit:contain !important;
+  background:#f3f5f6 !important;
+  border-radius:12px 12px 0 0 !important;
+}
+#gallery .penyerahan-public-caption{
+  box-sizing:border-box !important;
+  padding:7px 4px 8px !important;
+  min-height:31px !important;
+  text-align:center !important;
+  font-size:11px !important;
+  line-height:1.25 !important;
+  font-weight:600 !important;
+  color:#687482 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+}
+@media(max-width:700px){
+  #gallery{gap:7px !important;}
+  #gallery .penyerahan-public-card{border-radius:10px !important;}
+  #gallery .penyerahan-public-card img{
+    height:auto !important;
+    max-height:185px !important;
+    object-fit:contain !important;
+  }
+  #gallery .penyerahan-public-caption{
+    min-height:30px !important;
+    padding:6px 3px 7px !important;
+    font-size:11px !important;
+  }
+}
+@media(max-width:390px){
+  #gallery .penyerahan-public-caption{font-size:10.5px !important;}
 }
 </style>
