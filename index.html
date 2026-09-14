@@ -2610,3 +2610,45 @@ document.addEventListener("DOMContentLoaded", function(){
     .catch(function(){ /* biarkan data lokal jika GitHub gagal */ });
 })();
 </script>
+
+<style id="rijal-penyerahan-no-tipe-final">
+/* Penyerahan Unit: tanpa nama/tipe mobil */
+#penyerahanGallery .handover-photo-caption,
+#penyerahanGallery .penyerahan-photo-caption {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  color: #697586 !important;
+  padding: 6px 4px 7px !important;
+}
+#penyerahanGallery .handover-photo-caption .model-name,
+#penyerahanGallery .penyerahan-photo-caption .model-name,
+#penyerahanGallery .handover-photo-caption .car-model,
+#penyerahanGallery .penyerahan-photo-caption .car-model { display:none !important; }
+@media(max-width:700px){
+  #penyerahanGallery .handover-photo-caption,
+  #penyerahanGallery .penyerahan-photo-caption {
+    font-size: 10px !important;
+    padding: 5px 3px 6px !important;
+  }
+}
+</style>
+<script id="rijal-penyerahan-caption-clean-final">
+(function(){
+  function clean(){
+    var root=document.getElementById('penyerahanGallery');
+    if(!root) return;
+    root.querySelectorAll('.handover-photo-caption,.penyerahan-photo-caption').forEach(function(el){
+      // Remove model-name/car-model elements if present.
+      el.querySelectorAll('.model-name,.car-model').forEach(function(x){x.remove();});
+      // For plain text captions such as "Penyerahan Unit • img XXXXX", keep only the label.
+      if(!el.querySelector('a,button,input,textarea')) {
+        var txt=(el.textContent||'').trim();
+        if(/penyerahan unit/i.test(txt)) el.textContent='🤝 Penyerahan Unit';
+      }
+    });
+  }
+  clean();
+  new MutationObserver(clean).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
