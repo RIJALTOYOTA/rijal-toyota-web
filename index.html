@@ -2316,8 +2316,8 @@ document.addEventListener("DOMContentLoaded", function(){
       a.addEventListener("click",function(ev){
         var href=a.getAttribute("href");
         if(!href) return;
-        ev.preventDefault();
-        window.location.href=href;
+        // Biarkan link WA berjalan native agar klik langsung tanpa jedah.
+        return;
       },{capture:true});
     });
   }
@@ -2471,3 +2471,73 @@ document.addEventListener("DOMContentLoaded", function(){
 </html>
 
 
+
+
+<style id="rijal-penyerahan-final-polish">
+/* Sentuhan akhir: caption penyerahan lebih kecil + kartu lebih rapi */
+#penyerahanGallery{
+  gap:10px !important;
+  margin-top:10px !important;
+}
+#penyerahanGallery .penyerahan-photo-card,
+#penyerahanGallery .handover-photo-card{
+  border-radius:12px !important;
+  box-shadow:0 2px 9px rgba(0,0,0,.05) !important;
+}
+#penyerahanGallery .penyerahan-photo-caption,
+#penyerahanGallery .handover-photo-caption{
+  padding:5px 5px 6px !important;
+  font-size:9px !important;
+  line-height:1.15 !important;
+  font-weight:500 !important;
+  color:#7a8490 !important;
+}
+@media(max-width:700px){
+  #penyerahanGallery{
+    gap:6px !important;
+    margin-top:8px !important;
+  }
+  #penyerahanGallery .penyerahan-photo-card,
+  #penyerahanGallery .handover-photo-card{
+    border-radius:9px !important;
+  }
+  #penyerahanGallery img{
+    height:112px !important;
+  }
+  #penyerahanGallery .penyerahan-photo-caption,
+  #penyerahanGallery .handover-photo-caption{
+    padding:4px 2px 5px !important;
+    font-size:8px !important;
+    line-height:1.1 !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+}
+@media(max-width:390px){
+  #penyerahanGallery img{
+    height:105px !important;
+  }
+  #penyerahanGallery .penyerahan-photo-caption,
+  #penyerahanGallery .handover-photo-caption{
+    font-size:7.5px !important;
+    padding:3px 2px 4px !important;
+  }
+}
+</style>
+<script id="rijal-wa-native-final">
+(function(){
+  function enableNativeWA(){
+    document.querySelectorAll('a[href*="wa.me"],a[href*="api.whatsapp.com"]').forEach(function(a){
+      a.removeAttribute('onclick');
+      a.style.cursor='pointer';
+      // Jangan tambahkan handler baru: biarkan klik native browser langsung ke WhatsApp.
+    });
+  }
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",enableNativeWA,{once:true});
+  }else{
+    enableNativeWA();
+  }
+})();
+</script>
